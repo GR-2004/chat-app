@@ -6,6 +6,6 @@ import {getMessages, sendMessage} from "../controllers/message.controller.js"
 const router = express.Router();
 
 router.get("/:id", verifyJWT, getMessages);
-router.get("/send/:id", verifyJWT, sendMessage);
+router.post("/send/:id", verifyJWT, sendMessage);
 
 export default router;

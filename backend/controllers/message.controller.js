@@ -7,6 +7,10 @@ export const sendMessage = async (req, res) => {
     const { message } = req.body;
     const { id: receiverId } = req.params;
     const senderId = req.user._id;
+    console.log(req.body);
+    if(!message){
+      return res.status(400).json({message: "message is required"});
+    }
 
     let conversation = await Conversation.findOne({
       participants: { $all: [senderId, receiverId] },
@@ -41,7 +45,7 @@ export const sendMessage = async (req, res) => {
   }
 };
 
-export const getMessage = async (req, res) => {
+export const getMessages = async (req, res) => {
   try {
     const { id: userToChatId } = req.params;
     const senderId = req.user._id;
